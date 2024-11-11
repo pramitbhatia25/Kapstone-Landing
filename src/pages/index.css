@@ -1,0 +1,17 @@
+.landingpage {
+    width: 100dvw;
+    height: fit-content;
+    min-height: 100dvh;
+}
+
+.marketplace {
+    width: 100dvw;
+    height: fit-content;
+    min-height: 100dvh;
+}
+
+.login {
+    width: 100dvw;
+    height: fit-content;
+    min-height: 100dvh;
+}

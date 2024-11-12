@@ -9,6 +9,10 @@ export default defineConfig({
       src: "/src",
     },
   },
+  define: {
+    VITE_KEY: import.meta.env.VITE_KEY,
+    VITE_URL: import.meta.env.VITE_URL,
+  },
   server: {
     proxy: {
       '/api': {

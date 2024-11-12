@@ -1,6 +1,5 @@
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, DropdownItem, DropdownTrigger, Dropdown, DropdownMenu, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, Input } from "@nextui-org/react";
+import { Navbar, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem } from "@nextui-org/react";
 import { useState } from "react";
-import { SearchIcon } from "./SearchIcon.jsx";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
 

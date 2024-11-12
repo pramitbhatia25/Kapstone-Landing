@@ -4,8 +4,11 @@ import "./index.css";
 import Cookies from 'js-cookie';
 import { Button, Card, CardBody, CardFooter, CardHeader, Chip, CircularProgress, Divider, Image, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Skeleton, Spacer, useDisclosure } from '@nextui-org/react';
 import { useEffect, useState } from "react";
-import projects from "./projects";
+import projects from "../data/projects";
+import features from "../data/features"
 import { MailIcon } from "../components/MailIcon";
+import register from "../components/register";
+import ConfettiExplosion from 'react-confetti-explosion';
 
 function LandingPage() {
 
@@ -16,7 +19,17 @@ function LandingPage() {
             alignItems: 'center',
             justifyContent: "center",
             padding: '1rem',
-            width: '80vw',
+            width: '100vw',
+            margin: 'auto',
+            minHeight: '60vh',
+        },
+        container2: {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: "center",
+            padding: '1rem',
+            width: '100vw',
             margin: 'auto',
             minHeight: '60vh',
         },
@@ -59,12 +72,31 @@ function LandingPage() {
         subheadingText: {
             fontSize: '1.125rem',
             textAlign: 'center',
+            width: '80%',
+        },
+        heading2Text: {
+            fontSize: '2rem',
+            margin: '0.5rem 0',
+            textAlign: 'center',
             width: '100%',
+            fontWeight: 'bold',
+        },
+        subheading2Text: {
+            fontSize: '1.125rem',
+            textAlign: 'center',
+            width: '100%',
+        },
+        subheading3Text: {
+            fontSize: '1.5rem',
+            textAlign: 'center',
+            width: '80%',
         },
     };
 
     const [isLoaded, setIsLoaded] = useState(false);
+    const [isExploding, setIsExploding] = useState(false);
     const [isRegistered, setIsRegistered] = useState(false);
+    const [registrationMessage, setRegistrationMessage] = useState("");
     const [registerLoading, setRegisterLoading] = useState(false);
     const [value, setValue] = useState("");
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -84,22 +116,36 @@ function LandingPage() {
         return () => clearTimeout(timer);
     }, []);
 
-    function register() {
+    async function registerUser() {
         setRegisterLoading(true)
-        console.log(value);
 
-        // Delay the registration process by 5 seconds
-        setTimeout(() => {
-            // Simulate registration and set cookie
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            setRegistrationMessage("Please enter a valid email address.");
+            setRegisterLoading(false);
+            return;
+        }
+    
+        const regres = await register(value);
+
+        if(regres === "Success") {
+            setIsExploding(true)
+            setRegistrationMessage("You have been registered successfully!")
             Cookies.set('registered', 'true', { expires: 7 });
             setRegisterLoading(false)
             setIsRegistered(true);
-        }, 5000);
+        }
+        else {
+            setRegistrationMessage("Error with registration, please try again!")
+            setRegisterLoading(false)
+        }
+
     }
 
     return (
 
         <div className="landingpage">
+
             <CustomNavbar />
 
             <div style={styles.container}>
@@ -115,20 +161,18 @@ function LandingPage() {
                         New
                     </Chip>
                     <div className="flex justify-center items-center text-center px-2">
-                        Kapstone Is Launching Spring 2025
+                        Launching Spring 2025
                     </div>
                 </div>
 
                 <Spacer y={1.5} />
 
-                {/* Main Heading */}
                 <div style={styles.headingText}>
                     The <span className="text-green-400">#1</span> Computer Science Project Marketplace
                 </div>
 
-                {/* Subheading */}
                 <div style={styles.subheadingText}>
-                    Access curated CS projects for 20+ different fields, including Machine Learning, Data Science, Web Development, Cybersecurity, Blockchain & many more.
+                    Access 200+ CS projects in 20+ different fields, including Machine Learning, Data Science, Web Development, Cybersecurity, Blockchain & many more.
                 </div>
 
                 <Spacer y={2} />
@@ -150,7 +194,7 @@ function LandingPage() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-                {(isRegistered ? projects.slice(0, 6) : projects.slice(0, 6)).map((project, index) => (
+                {(isRegistered ? projects.slice(0, 3) : projects.slice(0, 3)).map((project, index) => (
                     <Skeleton classname="cursor-default" key={index} isLoaded={isLoaded} className="rounded-lg">
                         <Card className=" cursor-default hover:scale-[1.05] transition-transform duration-200 ease-in-out">
                             <CardHeader className="flex gap-3 items-center">
@@ -183,10 +227,63 @@ function LandingPage() {
 
             </div>
 
+            <div style={styles.container2}>
+
+                <Spacer y={5} />
+
+                <div style={styles.heading2Text}>
+                    Find project ideas, startup cofounders or project teammates, all in one place
+                </div>
+
+                <div style={styles.subheading2Text}>
+                    We simplify Computer Science Project Sourcing and Management, connecting people to work on ideas together.
+                </div>
+
+                <Spacer y={10} />
+                <Chip
+                    variant="shadow"
+                    classNames={{
+                        base: "bg-gradient-to-br from-green-500 to-lime-200 border-small border-white/50 shadow-lime-500/30",
+                        content: "drop-shadow shadow-black text-black",
+                    }}
+                >
+                    Features
+                </Chip>
+
+                <Spacer y={5} />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+                    {features.map((feature, index) => (
+                        <Skeleton classname="cursor-default" key={index} isLoaded={isLoaded} className="rounded-lg">
+                            <Card className=" cursor-default hover:scale-[1.05] transition-transform duration-200 ease-in-out">
+                                <CardHeader className="flex gap-3 items-center">
+                                    <div style={{ height: "40px", width: "40px" }}>
+                                        {feature.icon}
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <p className="text-lg font-semibold">{feature.title}</p>
+                                    </div>
+                                </CardHeader>
+                                <CardBody>
+                                    <p className="text-md text-ellipsis line-clamp-5">{feature.description}</p>
+                                </CardBody>
+                            </Card>
+                        </Skeleton>
+                    ))}
+
+                </div>
+
+
+            </div>
+
             <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
                 <ModalContent>
                     {(onClose) => (
                         <>
+                        {
+                            isExploding && <ConfettiExplosion />
+                        }
+            
                             <ModalHeader>
                                 <h3>Register for Early Access</h3>
                             </ModalHeader>
@@ -201,9 +298,7 @@ function LandingPage() {
                                         startContent={<MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />}
                                     />
                                 )}
-                                {isRegistered && (
-                                    <p> You have been registered successfully!</p>
-                                )}
+                                <p>{registrationMessage}</p>
                                 {registerLoading && <>
                                     <CircularProgress className="mx-auto" size="sm" color="success" aria-label="Loading..." />
                                 </>}
@@ -213,7 +308,7 @@ function LandingPage() {
                                     Close
                                 </Button>
                                 {!isRegistered && (
-                                    <Button color="success" auto css={styles.mainButton} onClick={register}>
+                                    <Button color="success" auto css={styles.mainButton} onClick={registerUser}>
                                         Register
                                     </Button>
                                 )}
@@ -224,10 +319,10 @@ function LandingPage() {
             </Modal>
 
             <div style={styles.container}>
-                <div style={styles.subheadingText}>
-                    Create a free account and get early access to the <b> Kapstone Project Management Platform </b> & <b>200+ CS Projects & Solutions </b>...
+                <div style={styles.subheading3Text}>
+                    Create a free account and get early access to the <b> Kapstone Project Management Platform </b> & <b>200+ CS Projects & Solutions </b>
                 </div>
-                <Spacer y={2} />
+                <Spacer y={5} />
                 {!isRegistered && (
                     <Button color="success" auto css={styles.mainButton} onPress={onOpen}>
                         Register for early access!

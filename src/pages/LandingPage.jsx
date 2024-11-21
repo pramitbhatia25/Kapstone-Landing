@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import CustomNavbar from "../components/Navbar";
 import "./index.css";
 import Cookies from 'js-cookie';
@@ -9,6 +8,7 @@ import features from "../data/features"
 import { MailIcon } from "../components/MailIcon";
 import register from "../components/register";
 import ConfettiExplosion from 'react-confetti-explosion';
+import {User} from "@nextui-org/react";
 
 function LandingPage() {
 
@@ -217,9 +217,13 @@ function LandingPage() {
                             </CardBody>
                             <Divider />
                             <CardFooter>
-                                <Link className='text-xs' href={project.projectLink}>
-                                    Visit Project 🔗
-                                </Link>
+                                <User   
+                                    name={project.project_owner}
+                                    description={project.project_owner_handle}
+                                    avatarProps={{
+                                        src: project.project_owner_avatar
+                                    }}
+                                />
                             </CardFooter>
                         </Card>
                     </Skeleton>

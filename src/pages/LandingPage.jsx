@@ -12,8 +12,6 @@ import { User } from "@nextui-org/react";
 import msfs from "../assets/msfspng.png"
 import sx from "../assets/sx.webp"
 import gt from "../assets/gt.png"
-import icup from "../assets/icup.png"
-import gsu from "../assets/gsu.png"
 
 function LandingPage() {
 
@@ -117,12 +115,6 @@ function LandingPage() {
 
     }
 
-    const images = [
-        sx,
-        msfs,
-        gt,
-    ];
-
     return (
 
         <div className="landingpage">
@@ -144,7 +136,7 @@ function LandingPage() {
                         New
                     </Chip>
                     <div className="flex text-sm justify-start items-start text-start md:text-center md:justify-center md:items-center px-2">
-                        Kapstone reaches Microsoft Image Cup 2025 Semifinals!
+                        Kapstone places 3rd at Startup Exchange Fall 2024 Summit!
                     </div>
                 </div>
 
@@ -192,9 +184,9 @@ function LandingPage() {
 
             <Spacer y={5} />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 mx-5">
+            <div className="flex flex-row p-5 md:p-10 overflow-scroll md:justify-around">
                 {projects.slice(0, 3).map((project, index) => (
-                    <Card key={index} className=" cursor-default hover:scale-[1.02] transition-transform duration-200 ease-in-out">
+                    <Card key={index} className=" cursor-default hover:scale-[1.02] transition-transform duration-200 ease-in-out mr-5 flex-shrink-0 w-[350px] md:min-w-[28dvw]">
                         <CardHeader className="flex gap-3 items-center">
                             <Image
                                 alt="nextui logo"
@@ -213,7 +205,7 @@ function LandingPage() {
                         </CardHeader>
                         <Divider />
                         <CardBody>
-                            <p className="text-sm overflow-y-auto h-[10rem]">
+                            <p className="text-sm h-[fit]">
                                 {project.description}
                             </p>
                         </CardBody>
@@ -231,8 +223,12 @@ function LandingPage() {
                 ))}
 
             </div>
+            
+            <Spacer y={5} />
 
-            <div className="w-full flex justify-end cursor-pointer hover:scale-[1.01] transition-transform duration-200 ease-in-out px-10">
+            <div className=" flex justify-end cursor-pointer ">
+            <div className="active:scale-[1.3] hover:scale-[1.01] transition-transform duration-200 ease-in-out px-10">
+            
                 <Chip
                     variant="shadow"
                     classNames={{
@@ -240,9 +236,10 @@ function LandingPage() {
                         content: "drop-shadow shadow-black text-black",
                     }}
                 >
-                    {"....view More ->"}
+                    {"....view more ->"}
                 </Chip>
-            </div>
+                </div>
+                </div>
             
             <Spacer y={40} />
 
@@ -254,7 +251,7 @@ function LandingPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 p-4 mx-5">
                     {features.map((feature, index) => (
-                        <Card key={index} className=" cursor-default hover:scale-[1.05] transition-transform duration-200 ease-in-out">
+                        <Card key={index} className=" cursor-default h-[100px] hover:scale-[1.05] transition-transform duration-200 ease-in-out">
                             <CardHeader className="flex gap-3 items-center h-full">
                                 <div className="">
                                     {feature.icon}
@@ -270,35 +267,25 @@ function LandingPage() {
 
             </div>
 
-            <div className="h-[110dvh] flex justify-center items-center flex-col">
+            <div className="h-[100dvh] flex justify-center items-center flex-col ">
                 <div style={styles.heading2Text}>
                     Supported  By
                 </div>
 
                 <Spacer y={5} />
 
-                <div className="max-w-7xl mx-auto p-5 flex flex-row">
+                <div className="max-w-7xl mx-auto p-5 flex flex-col">
                     <img
                         src={sx}
-                        className="h-20 mx-[50px]"
+                        className="h-fit md:h-20 mx-[50px] my-[20px]"
                     />
                     <img
                         src={gt}
-                        className="h-20 mx-[50px]"
+                        className="h-fit md:h-20 mx-[50px] my-[20px]"
                     />
                     <img
                         src={msfs}
-                        className="h-20 mx-[50px]"
-                    />
-                </div>
-                <div className="max-w-7xl mx-auto p-5 pt-10 flex flex-row">
-                    <img
-                        src={icup}
-                        className="h-20 mx-[50px]"
-                    />
-                    <img
-                        src={gsu}
-                        className="h-20 mx-[50px]"
+                        className="h-fit md:h-20 mx-[50px] my-[20px]"
                     />
                 </div>
             </div>

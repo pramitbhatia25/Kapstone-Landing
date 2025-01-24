@@ -23,23 +23,22 @@ export default function CustomNavbar() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <a href="https://x.com/stearnswap">
-          <FaSquareXTwitter className="w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out" />
-        </a>
-        <a href="https://www.linkedin.com/company/stearncrypto/">
-          <RxLinkedinLogo className='w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out' />
-        </a>
-        <a href="mailto:hello@stearn.link">
-          <ImMail className="w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out" />
-        </a>
-        <IoIosApps className="w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out" onClick={() => { navigate("/dashboard") }} />
-
+        <div> <Button color="success" auto className="px-4 md:px-8" onClick={() => {navigate("/dashbaord")}}> Get Started </Button> </div>
       </NavbarContent>
     </Navbar>
   );
 }
 
 // <IoIosApps className="w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out" onClick={() => { navigate("/dashboard") }} />
+// <a href="https://x.com/stearnswap">
+// <FaSquareXTwitter className="w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out" />
+// </a>
+// <a href="https://www.linkedin.com/company/stearncrypto/">
+// <RxLinkedinLogo className='w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out' />
+// </a>
+// <a href="mailto:hello@stearn.link">
+// <ImMail className="w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out" />
+// </a>
 
 // <Layers color="white" />
 // <div className="cursor-pointer m-0 p-0 hover:scale-[1.05] transition-transform duration-200 ease-in-out px-2 font-bold text-white text-2xl" onClick={() => { navigate("/") }} >Stearn</div>

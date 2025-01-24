@@ -8,21 +8,17 @@ import features from "../data/features"
 import { MailIcon } from "../components/MailIcon";
 import register from "../components/register";
 import ConfettiExplosion from 'react-confetti-explosion';
-import {User} from "@nextui-org/react";
+import { User } from "@nextui-org/react";
+import msfs from "../assets/msfspng.png"
+import sx from "../assets/sx.webp"
+import gt from "../assets/gt.png"
+import icup from "../assets/icup.png"
+import gsu from "../assets/gsu.png"
 
 function LandingPage() {
 
     const styles = {
-        container: {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: "center",
-            padding: '1rem',
-            width: '100vw',
-            margin: 'auto',
-            minHeight: '60vh',
-        },
+
         container2: {
             display: 'flex',
             flexDirection: 'column',
@@ -52,27 +48,6 @@ function LandingPage() {
         },
         secondaryButton: {
             padding: '0.75rem 2rem',
-        },
-        chipContainer: {
-            display: 'flex',
-            gap: '0.5rem',
-            border: '1px solid black',
-            padding: '0.25rem',
-            backgroundColor: '#1a1a1a',
-            borderRadius: '20px',
-            alignItems: 'center',
-        },
-        headingText: {
-            fontSize: '2.5rem',
-            margin: '0.5rem 0',
-            textAlign: 'center',
-            width: '90%',
-            fontWeight: 'bold',
-        },
-        subheadingText: {
-            fontSize: '1.125rem',
-            textAlign: 'center',
-            width: '80%',
         },
         heading2Text: {
             fontSize: '2rem',
@@ -125,10 +100,10 @@ function LandingPage() {
             setRegisterLoading(false);
             return;
         }
-    
+
         const regres = await register(value);
 
-        if(regres === "Success") {
+        if (regres === "Success") {
             setIsExploding(true)
             setRegistrationMessage("You have been registered successfully!")
             Cookies.set('registered', 'true', { expires: 7 });
@@ -142,108 +117,122 @@ function LandingPage() {
 
     }
 
+    const images = [
+        sx,
+        msfs,
+        gt,
+    ];
+
     return (
 
         <div className="landingpage">
 
-            <CustomNavbar />
+            <div className="fixed w-full top-0 z-[50]">
+                <CustomNavbar />
+            </div>
 
-            <div style={styles.container}>
+            <div className="flex flex-col items-center md:items-start md:ml-10 justify-center p-4 pt-[20dvh] w-screen mx-auto min-h-[60vh]">
 
-                <div style={styles.chipContainer}>
+                <div className="flex gap-2 border border-black p-1 bg-[#1a1a1a] cursor-pointer rounded-full items-center hover:scale-x-[1.05] transition-transform duration-200 ease-in-out">
                     <Chip
                         variant="shadow"
                         classNames={{
-                            base: "bg-gradient-to-br from-green-500 to-lime-200 border-small border-white/50 shadow-lime-500/30",
-                            content: "drop-shadow shadow-black text-black",
+                            base: "bg-gradient-to-br from-green-500 to-lime-200 border-small border-white/50 shadow-lime-500/30 ",
+                            content: "drop-shadow shadow-black text-black ",
                         }}
                     >
                         New
                     </Chip>
-                    <div className="flex justify-center items-center text-center px-2">
-                        Launching Spring 2025
+                    <div className="flex text-sm justify-start items-start text-start md:text-center md:justify-center md:items-center px-2">
+                        Kapstone reaches Microsoft Image Cup 2025 Semifinals!
                     </div>
                 </div>
 
-                <Spacer y={1.5} />
+                <Spacer y={5} />
 
-                <div style={styles.headingText}>
-                    The <span className="text-green-400">#1</span> Computer Science Project Marketplace
+                <div className="text-5xl md:text-7xl my-2 text-center md:text-left w-[90%] font-bold">
+                    Project Sourcing Made <span className="text-green-400">Easy</span>
                 </div>
 
-                <div style={styles.subheadingText}>
-                    Access 200+ CS projects in 20+ different fields, including Machine Learning, Data Science, Web Development, Cybersecurity, Blockchain & many more.
+                <Spacer y={5} />
+
+                <div className="text-md md:text-xl text-center md:text-left w-[80%]">
+                    Browse 200+ CS projects in 20+ different fields, including Machine Learning, Data Science, Web Development, Cybersecurity, Blockchain & many more.
                 </div>
 
-                <Spacer y={2} />
+                <Spacer y={5} />
 
-                {isRegistered ? <>
-                    <div style={styles.buttonGroup}>
-                        <Button color="success" auto css={styles.mainButton}>
-                            Thank you for registering!
-                        </Button>
-                    </div>
-                </> : <>
-                    <div style={styles.buttonGroup}>
-                        <Button color="success" auto css={styles.mainButton} onPress={onOpen}>
-                            Get Early Access
-                        </Button>
-                    </div>
-                </>}
-
+                <div className="z-[3] flex flex-col sm:flex-row gap-4 max-w-[500px]">
+                    <Input
+                        type="email"
+                        placeholder="you@example.com"
+                        labelPlacement="outside"
+                        value={value}
+                        onChange={(e) => setValue(e.target.value)}
+                        startContent={<MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />}
+                    />
+                    {registerLoading ? <>
+                        <div className="flex gap-4 m-auto">
+                            <Button color="success" auto className="mb-5 py-3 px-8" >
+                                Loading...
+                            </Button>
+                        </div>
+                    </> : <>
+                        <div className="flex gap-4 m-auto">
+                            <Button color="success" auto className="mb-5 py-3 px-8 custom_btn" onClick={registerUser}>
+                                Join Waitlist
+                            </Button>
+                        </div>
+                    </>}
+                </div>
+                <div className="z-[3]">
+                    {registrationMessage}
+                </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
-                {(isRegistered ? projects.slice(0, 3) : projects.slice(0, 3)).map((project, index) => (
-                    <Skeleton classname="cursor-default" key={index} isLoaded={isLoaded} className="rounded-lg">
-                        <Card className=" cursor-default hover:scale-[1.05] transition-transform duration-200 ease-in-out">
-                            <CardHeader className="flex gap-3 items-center">
-                                <Image
-                                    alt="nextui logo"
-                                    height={40}
-                                    width={40}
-                                    radius="sm"
-                                    src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
-                                    className="flex-shrink-0"
-                                />
-                                <div className="flex flex-col">
-                                    <p className="text-sm font-semibold overflow-hidden text-ellipsis line-clamp-1">{project.name}</p>
-                                    <Chip color="success" variant="solid" className='my-1 text-[12px] p-0'>{project.category}</Chip>
-                                </div>
-                            </CardHeader>
-                            <Divider />
-                            <CardBody>
-                                <p className="text-xs text-ellipsis line-clamp-5">{project.description}</p>
-                            </CardBody>
-                            <Divider />
-                            <CardFooter>
-                                <User   
-                                    name={project.project_owner}
-                                    description={project.project_owner_handle}
-                                    avatarProps={{
-                                        src: project.project_owner_avatar
-                                    }}
-                                />
-                            </CardFooter>
-                        </Card>
-                    </Skeleton>
+            <Spacer y={5} />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4 mx-5">
+                {projects.slice(0, 3).map((project, index) => (
+                    <Card key={index} className=" cursor-default hover:scale-[1.02] transition-transform duration-200 ease-in-out">
+                        <CardHeader className="flex gap-3 items-center">
+                            <Image
+                                alt="nextui logo"
+                                height={40}
+                                width={40}
+                                radius="sm"
+                                src="https://avatars.githubusercontent.com/u/86160567?s=200&v=4"
+                                className="flex-shrink-0"
+                            />
+                            <div className="flex flex-col">
+                                <p className="text-md font-semibold overflow-hidden text-ellipsis line-clamp-2 min-h-[2rem]">
+                                    {project.name}
+                                </p>
+                                <Chip color="success" variant="solid" className='my-1 text-[12px] p-0'>{project.category}</Chip>
+                            </div>
+                        </CardHeader>
+                        <Divider />
+                        <CardBody>
+                            <p className="text-sm overflow-y-auto h-[10rem]">
+                                {project.description}
+                            </p>
+                        </CardBody>
+                        <Divider />
+                        <CardFooter>
+                            <User
+                                name={project.project_owner}
+                                description={project.project_owner_handle}
+                                avatarProps={{
+                                    src: project.project_owner_avatar
+                                }}
+                            />
+                        </CardFooter>
+                    </Card>
                 ))}
 
             </div>
 
-            <div style={styles.container2}>
-
-                <Spacer y={5} />
-
-                <div style={styles.heading2Text}>
-                    Find project ideas, startup cofounders or project teammates, all in one place
-                </div>
-
-                <div style={styles.subheading2Text}>
-                    We simplify Computer Science Project Sourcing and Management, connecting people to work on ideas together.
-                </div>
-
-                <Spacer y={10} />
+            <div className="w-full flex justify-end cursor-pointer hover:scale-[1.01] transition-transform duration-200 ease-in-out px-10">
                 <Chip
                     variant="shadow"
                     classNames={{
@@ -251,93 +240,136 @@ function LandingPage() {
                         content: "drop-shadow shadow-black text-black",
                     }}
                 >
-                    Features
+                    {"....view More ->"}
                 </Chip>
+            </div>
+            
+            <Spacer y={40} />
 
-                <Spacer y={5} />
+            <div className="h-fit">
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 p-4">
+                <div style={styles.heading2Text}>
+                    Find project ideas, startup cofounders or teammates, all in one place
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 p-4 mx-5">
                     {features.map((feature, index) => (
-                        <Skeleton classname="cursor-default" key={index} isLoaded={isLoaded} className="rounded-lg">
-                            <Card className=" cursor-default hover:scale-[1.05] transition-transform duration-200 ease-in-out">
-                                <CardHeader className="flex gap-3 items-center">
-                                    <div style={{ height: "40px", width: "40px" }}>
-                                        {feature.icon}
-                                    </div>
-                                    <div className="flex flex-col">
-                                        <p className="text-lg font-semibold">{feature.title}</p>
-                                    </div>
-                                </CardHeader>
-                                <CardBody>
-                                    <p className="text-md text-ellipsis line-clamp-5">{feature.description}</p>
-                                </CardBody>
-                            </Card>
-                        </Skeleton>
+                        <Card key={index} className=" cursor-default hover:scale-[1.05] transition-transform duration-200 ease-in-out">
+                            <CardHeader className="flex gap-3 items-center h-full">
+                                <div className="">
+                                    {feature.icon}
+                                </div>
+                                <div className="flex flex-col">
+                                    <p className="text-lg font-semibold">{feature.title}</p>
+                                </div>
+                            </CardHeader>
+                        </Card>
                     ))}
 
                 </div>
 
-
             </div>
 
-            <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
-                <ModalContent>
-                    {(onClose) => (
-                        <>
-                        {
-                            isExploding && <ConfettiExplosion />
-                        }
-            
-                            <ModalHeader>
-                                <h3>Register for Early Access</h3>
-                            </ModalHeader>
-                            <ModalBody>
-                                {!isRegistered && (
-                                    <Input
-                                        type="email"
-                                        placeholder="you@example.com"
-                                        labelPlacement="outside"
-                                        value={value}
-                                        onChange={(e) => setValue(e.target.value)}
-                                        startContent={<MailIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0" />}
-                                    />
-                                )}
-                                <p>{registrationMessage}</p>
-                                {registerLoading && <>
-                                    <CircularProgress className="mx-auto" size="sm" color="success" aria-label="Loading..." />
-                                </>}
-                            </ModalBody>
-                            <ModalFooter>
-                                <Button color="default" variant="light" onPress={onClose}>
-                                    Close
-                                </Button>
-                                {!isRegistered && (
-                                    <Button color="success" auto css={styles.mainButton} onClick={registerUser}>
-                                        Register
-                                    </Button>
-                                )}
-                            </ModalFooter>
-                        </>)}
-                </ModalContent>
-
-            </Modal>
-
-            <div style={styles.container}>
-                <div style={styles.subheading3Text}>
-                    Create a free account and get early access to the <b> Kapstone Project Management Platform </b> & <b>200+ CS Projects & Solutions </b>
+            <div className="h-[110dvh] flex justify-center items-center flex-col">
+                <div style={styles.heading2Text}>
+                    Supported  By
                 </div>
+
                 <Spacer y={5} />
-                {!isRegistered && (
-                    <Button color="success" auto css={styles.mainButton} onPress={onOpen}>
-                        Register for early access!
-                    </Button>
-                )}
-                {isRegistered && (
-                    <Button color="success" auto css={styles.mainButton} >
-                        Thank you for registering!
-                    </Button>
-                )}
+
+                <div className="max-w-7xl mx-auto p-5 flex flex-row">
+                    <img
+                        src={sx}
+                        className="h-20 mx-[50px]"
+                    />
+                    <img
+                        src={gt}
+                        className="h-20 mx-[50px]"
+                    />
+                    <img
+                        src={msfs}
+                        className="h-20 mx-[50px]"
+                    />
+                </div>
+                <div className="max-w-7xl mx-auto p-5 pt-10 flex flex-row">
+                    <img
+                        src={icup}
+                        className="h-20 mx-[50px]"
+                    />
+                    <img
+                        src={gsu}
+                        className="h-20 mx-[50px]"
+                    />
+                </div>
             </div>
+
+
+            <footer className="bg-black text-gray-300">
+                <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {/* About Section */}
+                        <div>
+                            <h2 className="text-lg font-semibold text-white">About Us</h2>
+                            <p className="mt-2 text-sm">
+                                Our mission is to empower students around the world to learn and grow through project-based programming, making hands-on learning accessible to everyone
+                            </p>
+                        </div>
+
+                        {/* Links Section */}
+                        <div>
+                            <h2 className="text-lg font-semibold text-white">Quick Links</h2>
+                            <ul className="mt-2 space-y-2">
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="hover:underline hover:text-white transition"
+                                    >
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="hover:underline hover:text-white transition"
+                                    >
+                                        LinkedIn
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="hover:underline hover:text-white transition"
+                                    >
+                                        Support Us
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        href="#"
+                                        className="hover:underline hover:text-white transition"
+                                    >
+                                        Careers
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+                        {/* Contact Section */}
+                        <div>
+                            <h2 className="text-lg font-semibold text-white">Contact Us</h2>
+                            <p className="mt-2 text-sm">Email: pramitbhatia25@gmail.com</p>
+                            <p className="text-sm">Phone: +1 470 430 3868</p>
+                        </div>
+                    </div>
+
+                    <div className="border-t border-gray-700 mt-8 pt-4 text-center">
+                        <p className="text-sm">
+                            &copy; {new Date().getFullYear()} Kapstone. All rights reserved.
+                        </p>
+                    </div>
+                </div>
+            </footer>
+
         </div>
     );
 }

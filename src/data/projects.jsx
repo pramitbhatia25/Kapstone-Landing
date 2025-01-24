@@ -32,7 +32,7 @@ const projects = [
         project_owner_avatar: "https://static1.srcdn.com/wordpress/wp-content/uploads/2022/06/The-MCU-Needs-To-Kill-Smart-Hulk-For-The-Best-Hulk-Movie.jpg"
     },
     {
-        name: "Optimizing Cloud Resource Management with AI",
+        name: "Optimizing Cloud Resource Management",
         category: "Cloud Computing",
         sponsor: "Global Cloud Services",
         industry: "Cloud Computing",

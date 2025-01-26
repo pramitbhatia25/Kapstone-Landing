@@ -1,44 +1,96 @@
-import { Navbar, NavbarContent, NavbarItem, Link, NavbarBrand, Button } from "@nextui-org/react";
+import { Button, Input } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 import "./index.css";
-import { Layers } from "lucide-react";
-import { RiTelegramLine } from "react-icons/ri";
-import { AiOutlineDiscord } from "react-icons/ai";
-import { IoIosApps } from "react-icons/io";
-import { RxLinkedinLogo } from "react-icons/rx";
-import { FaSquareXTwitter } from "react-icons/fa6";
-import { ImMail } from "react-icons/im";
+import { Layers, User } from "lucide-react";
+import { RxHamburgerMenu } from "react-icons/rx";
 
-export default function CustomNavbar() {
+export default function CustomNavbar({ isSidebarOpen, setIsSidebarOpen }) {
   const navigate = useNavigate();
 
+  const SearchIcon = (props) => {
+    return (
+      <svg
+        aria-hidden="true"
+        fill="none"
+        focusable="false"
+        height="1em"
+        role="presentation"
+        viewBox="0 0 24 24"
+        width="1em"
+        {...props}
+      >
+        <path
+          d="M11.5 21C16.7467 21 21 16.7467 21 11.5C21 6.25329 16.7467 2 11.5 2C6.25329 2 2 6.25329 2 11.5C2 16.7467 6.25329 21 11.5 21Z"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+        <path
+          d="M22 22L20 20"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+        />
+      </svg>
+    );
+  };
+
   return (
-    <Navbar className="z-[2] h-[10dvh] w-[90dvw] md:w-[96dvw] max-h-[70px] my-[2dvh] mx-[5dvw] md:mx-[2dvw] bg-white/10 backdrop-blur-md shadow-lg rounded-xl border border-white/20" maxWidth="xl">
+    <div className="h-[10dvh] w-[100dvw] max-h-[60px] bg-[#0f0f0f] flex flex-row justify-between">
 
-      <NavbarContent justify="start">
-        <NavbarBrand>
+      <div className="w-fit flex flex-row">
+        <div onClick={() => { setIsSidebarOpen(!isSidebarOpen) }} className="m-[1dvw] cursor-pointer h-fit flex justify-center items-center bg-[#0f0f0f] hover:bg-white hover:bg-opacity-10 rounded-full px-[0.5dvw] py-2 my-auto transition-colors duration-200 ease-in-out">
+          <RxHamburgerMenu className="w-[2dvw] min-w-[20px]" color={"white"} />
+        </div>
+        <div className="flex h-full flex-row items-center justify-center pl-2">
           <Layers color="#02ff01" />
-          <div className="text-2xl text-[#02ff01] font-bold cursor-pointer m-0 mx-5 p-0 hover:scale-[1.05] transition-transform duration-200 ease-in-out" onClick={() => { navigate("/") }} >Kapstone</div>
-        </NavbarBrand>
-      </NavbarContent>
+          <div className="text-xl text-white cursor-pointer pl-1 tracking-tighter" >Kapstone</div>
+        </div>
+      </div>
 
-      <NavbarContent justify="end">
-        <div> <Button color="success" auto className="px-4 md:px-8" onClick={() => {navigate("/dashbaord")}}> Get Started </Button> </div>
-      </NavbarContent>
-    </Navbar>
+      <div className="w-[50%] h-[10dvh] items-center max-h-[60px] overflow-hidden hidden md:flex">
+        <Input
+          isClearable
+          size={"sm"}
+          classNames={{
+            label: "text-black/50 dark:text-white/90",
+            input: [
+              "bg-transparent",
+              "text-black/90 dark:text-white/90",
+              "placeholder:text-default-700/50 dark:placeholder:text-white/60",
+            ],
+            innerWrapper: "bg-transparent",
+            inputWrapper: [
+              "shadow-xl",
+              "bg-default-200/50",
+              "dark:bg-default/60",
+              "backdrop-blur-xl",
+              "backdrop-saturate-200",
+              "hover:bg-default-200/70",
+              "dark:hover:bg-default/70",
+              "group-data-[focus=true]:bg-default-200/50",
+              "dark:group-data-[focus=true]:bg-default/60",
+              "!cursor-text",
+            ],
+          }}
+          placeholder="Type to search..."
+          radius="sm"
+          startContent={
+            <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+          }
+        />
+      </div>
+
+      <div className="h-full w-fit flex items-center justify-center">
+        <div> 
+          <Button size={"sm"} className="mx-[1dvw]" onClick={() => { navigate("/dashbaord") }}> 
+            <User color="white" className="w-[1.5dvw] min-w-[20px]" />
+              Sign In
+          </Button>  
+        </div>
+      </div>
+    </div>
   );
 }
-
-// <IoIosApps className="w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out" onClick={() => { navigate("/dashboard") }} />
-// <a href="https://x.com/stearnswap">
-// <FaSquareXTwitter className="w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out" />
-// </a>
-// <a href="https://www.linkedin.com/company/stearncrypto/">
-// <RxLinkedinLogo className='w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out' />
-// </a>
-// <a href="mailto:hello@stearn.link">
-// <ImMail className="w-6 h-6 cursor-pointer hover:scale-[1.1] transition-transform duration-200 ease-in-out" />
-// </a>
-
-// <Layers color="white" />
-// <div className="cursor-pointer m-0 p-0 hover:scale-[1.05] transition-transform duration-200 ease-in-out px-2 font-bold text-white text-2xl" onClick={() => { navigate("/") }} >Stearn</div>

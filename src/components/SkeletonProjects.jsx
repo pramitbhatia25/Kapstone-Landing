@@ -1,6 +1,14 @@
 import { Avatar, Skeleton } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 
 function SkeletonProjects({ isSidebarOpen, data, selectedFilters }) {
+
+    const navigate = useNavigate()
+    
+    const handleProjectClick = (projectId) => {
+        navigate(`/projects/${projectId}`);
+    };
+
     return <>
         {data.length != 0 ?
             <div className="h-full w-full flex flex-wrap gap-5 p-4">
@@ -15,7 +23,9 @@ function SkeletonProjects({ isSidebarOpen, data, selectedFilters }) {
                             <div
                                 className={`h-[30dvh] max-h-[200px] flex flex-col items-center space-y-2 bg-black/30 rounded-lg overflow-hidden`}
                             >
-                                <div className="h-full w-full hover:scale-[1.1] hover:cursor-pointer transition-transform duration-300 ease-in-out">
+                                <div className="h-full w-full hover:scale-[1.1] hover:cursor-pointer transition-transform duration-300 ease-in-out"
+                                onClick={() => {handleProjectClick(project.id)}}                                
+                                >
                                     <img
                                         src={`https://kapstoneimages.blob.core.windows.net/images/${project.id}.jpg`}
                                         alt={project.name}
@@ -28,7 +38,8 @@ function SkeletonProjects({ isSidebarOpen, data, selectedFilters }) {
                                     } md:max-w-[350px] text-white py-2 flex flex-row flex-wrap`}
                             >
                                 <div className="flex flex-col w-[85%]">
-                                    <h3 className="hover:cursor-pointer w-full font-semibold text-sm flex flex-wrap">
+                                    <h3 className="hover:cursor-pointer w-full font-semibold text-sm flex flex-wrap"
+                                    onClick={() => {handleProjectClick(project.id)}}  >
                                         {project.name}
                                     </h3>
                                     <p className="text-xs text-gray-400">@{project.userName}</p>

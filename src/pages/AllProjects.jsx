@@ -2,27 +2,64 @@ import { useEffect, useState } from "react";
 import CustomNavbar from "../components/Navbar";
 import { Avatar, Skeleton } from "@nextui-org/react";
 import Sidebar from "../components/Sidebar";
-import projects from "../data/projects";
 import SkeletonProjects from "../components/SkeletonProjects";
 import Filters from "../components/Filters";
 
-function LandingPage2({ isSidebarOpen, setIsSidebarOpen }) {
+function AllProjects({ isSidebarOpen, setIsSidebarOpen }) {
 
 
     const [selectedFilters, setSelectedFilters] = useState("All");
+    const allFilters = [
+        "All",
+        "Artificial Intelligence",
+        "Machine Learning",
+        "Cybersecurity",
+        "Blockchain",
+        "Cloud Computing",
+        "Data Science",
+        "Internet of Things",
+        "Augmented Reality",
+        "Virtual Reality",
+        "Robotics",
+        "Big Data",
+        "DevOps",
+        "Quantum Computing",
+        "Edge Computing",
+        "Digital Twin",
+        "Natural Language Processing",
+        "Computer Vision",
+        "Game Development",
+        "Human-Computer Interaction",
+        "Mobile App Development",
+        "Web Development",
+        "Autonomous Systems",
+        "E-Learning Platforms",
+        "Healthcare Technology",
+        "Fintech Solutions",
+        "Renewable Energy Systems",
+        "Smart Cities",
+        "Social Network Analysis",
+        "Biometric Security Systems",
+        "3D Printing",
+    ]
+
     const [data, setData] = useState([])
 
     useEffect(() => {
 
-        const timer = setTimeout(() => {
-            setData(projects)
-        }, 2000);
-
-        return () => clearTimeout(timer);
+        fetch('https://kapstone-landing-server.vercel.app/projects')
+          .then((response) => response.json())
+          .then((receivedData) => {
+            setData(receivedData)
+          })
+          .catch((error) => {
+            console.error('Error fetching projects:', error);
+          });
 
     }, [])
 
-    return <div className="landingpage2 bg-[#0f0f0f]">
+    
+    return <div className="allProjects bg-[#0f0f0f]">
         <div className="w-full top-0 z-[50]">
             <CustomNavbar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
         </div>
@@ -39,7 +76,7 @@ function LandingPage2({ isSidebarOpen, setIsSidebarOpen }) {
 
             <div className="main flex flex-col">
                 <div className={`h-[10dvh] w-[100dvw] ${isSidebarOpen ? "md:w-[85dvw]" : "md:w-[95dvw]"}`}>
-                    <Filters selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} />
+                    <Filters selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} allFilters={allFilters} />
                 </div>
                 <div className={`h-[max(80dvh,calc(90dvh-60px))] overflow-auto flex flex-col w-[100dvw] ${isSidebarOpen ? "md:w-[85dvw]" : "md:w-[95dvw]"}`}>
                     <SkeletonProjects isSidebarOpen={isSidebarOpen} data={data} selectedFilters={selectedFilters} />
@@ -51,4 +88,4 @@ function LandingPage2({ isSidebarOpen, setIsSidebarOpen }) {
     </div>
 }
 
-export default LandingPage2;
+export default AllProjects;

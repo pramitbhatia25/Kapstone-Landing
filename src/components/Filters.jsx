@@ -2,7 +2,7 @@ import { Button } from "@nextui-org/button";
 import { MoveLeft, MoveRight } from "lucide-react";
 import { useRef } from "react";
 
-function Filters({ selectedFilters, setSelectedFilters }) {
+function Filters({ selectedFilters, setSelectedFilters, allFilters }) {
     const containerRef = useRef(null);
 
     const scrollRight = () => {
@@ -51,39 +51,7 @@ function Filters({ selectedFilters, setSelectedFilters }) {
                     className="h-full w-full flex items-center justify-start flex-row overflow-x-auto"
                     style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                 >
-                    {[
-                        "All",
-                        "Artificial Intelligence",
-                        "Machine Learning",
-                        "Cybersecurity",
-                        "Blockchain",
-                        "Cloud Computing",
-                        "Data Science",
-                        "Internet of Things",
-                        "Augmented Reality",
-                        "Virtual Reality",
-                        "Robotics",
-                        "Big Data",
-                        "DevOps",
-                        "Quantum Computing",
-                        "Edge Computing",
-                        "Digital Twin",
-                        "Natural Language Processing",
-                        "Computer Vision",
-                        "Game Development",
-                        "Human-Computer Interaction",
-                        "Mobile App Development",
-                        "Web Development",
-                        "Autonomous Systems",
-                        "E-Learning Platforms",
-                        "Healthcare Technology",
-                        "Fintech Solutions",
-                        "Renewable Energy Systems",
-                        "Smart Cities",
-                        "Social Network Analysis",
-                        "Biometric Security Systems",
-                        "3D Printing",
-                    ].map((category, index) => (
+                    {allFilters.map((category, index) => (
                         <div key={index}>
                             <Button
                                 size={"sm"}

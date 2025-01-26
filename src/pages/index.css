@@ -23,7 +23,7 @@
   
   .animate-marquee {
     display: flex;
-    width: max-content; /* Ensure the container adjusts to content width */
-    animation: marquee 20s linear infinite; /* Adjust duration for speed */
+    width: max-content;
+    animation: marquee 20s linear infinite;
   }
   

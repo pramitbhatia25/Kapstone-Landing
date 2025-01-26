@@ -41,8 +41,13 @@ function LandingPage({ isSidebarOpen, setIsSidebarOpen }) {
 
                         <Spacer y={4} />
 
-                        <div className="text-xs md:text-lg text-center md:text-left w-[95%]">
-                            Browse 200+ completed CS projects in 20+ different fields, complete with project completion guides, source code & attribution. High School, Undergraduate & Masters level projects now availabe!
+                        <div className="text-sm md:text-lg text-center md:text-left w-[95%]">
+                            <div>
+                                Browse 200+ completed CS projects in 20+ different fields, complete with project completion guides, source code & attribution.
+                            </div>
+                            <div>
+                                High School, Undergraduate & Masters level projects now availabe!
+                            </div>
                         </div>
 
                         <Spacer y={4} />
@@ -56,7 +61,9 @@ function LandingPage({ isSidebarOpen, setIsSidebarOpen }) {
                         </div>
                     </div>
 
-                    <div className="h-fit w-full overflow-hidden">
+                    <div className="h-fit w-full overflow-auto"
+                    style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                    >
                         <div className="flex flex-row px-5 md:px-10 md:justify-around animate-marquee"
                             style={{ animation: "marquee 100s linear infinite" }}
                         >
@@ -94,43 +101,15 @@ function LandingPage({ isSidebarOpen, setIsSidebarOpen }) {
                     </div>
                     <Spacer y={20} />
 
-                    <div className="h-fit">
-
-                        <div className="text-2xl md:text-2xl w-[100%] font-bold gap-[10px] text-center">
-                            Find project ideas, startup cofounders or teammates, all in one place 🔥
-                        </div>
-
-                        <Spacer y={8} />
-
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-4 mx-5">
-                            {features.map((feature, index) => (
-                                <Card key={index} className=" cursor-default h-[100px] hover:scale-[1.05] transition-transform duration-200 ease-in-out">
-                                    <CardHeader className="flex gap-3 items-center h-full">
-                                        <div className="">
-                                            {feature.icon}
-                                        </div>
-                                        <div className="flex flex-col">
-                                            <p className="text-md font-semibold">{feature.title}</p>
-                                        </div>
-                                    </CardHeader>
-                                </Card>
-                            ))}
-
-                        </div>
-
-                    </div>
-
-                    <Spacer y={20} />
-
                     <div className="h-fit flex justify-center items-center flex-col overflow-hidden">
-                        <div className="text-2xl md:text-2xl w-[100%] font-bold gap-[10px] flex items-center justify-center ">
+                        <div className="text-2xl md:text-2xl w-[100%] font-bold gap-[10px] flex items-center justify-center md:justify-start md:ml-10 ">
                             Supported  By
                         </div>
 
                         <Spacer y={8} />
 
                         <div className="max-w-7xl mx-auto px-5 flex flex-row md:flex-row w-full animate-marquee"
-                        style={{ animation: "marquee 40s linear infinite" }}
+                            style={{ animation: "marquee 40s linear infinite" }}
                         >
                             <img
                                 src={sx}
@@ -258,3 +237,34 @@ function LandingPage({ isSidebarOpen, setIsSidebarOpen }) {
 }
 
 export default LandingPage;
+
+
+
+// <div className="h-fit">
+
+// <div className="text-2xl md:text-2xl w-[100%] font-bold gap-[10px] text-center">
+//     Find project ideas, startup cofounders or teammates, all in one place 🔥
+// </div>
+
+// <Spacer y={8} />
+
+// <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-4 mx-5">
+//     {features.map((feature, index) => (
+//         <Card key={index} className=" cursor-default h-[100px] hover:scale-[1.05] transition-transform duration-200 ease-in-out">
+//             <CardHeader className="flex gap-3 items-center h-full">
+//                 <div className="">
+//                     {feature.icon}
+//                 </div>
+//                 <div className="flex flex-col">
+//                     <p className="text-md font-semibold">{feature.title}</p>
+//                 </div>
+//             </CardHeader>
+//         </Card>
+//     ))}
+
+// </div>
+
+// </div>
+
+// <Spacer y={20} />
+

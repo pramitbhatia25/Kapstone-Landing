@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import "./app.css";
-import LandingPage2 from "./pages/LandingPage2";
-import { useState } from "react";
+import AllProjects from "./pages/AllProjects";
+import { useEffect, useState } from "react";
+import ProjectDetails from "./pages/ProjectDetails";
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -10,7 +11,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/projects" element={<LandingPage2 isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}/>}></Route>
+        <Route path="/projects/:projectId" element={<ProjectDetails />} />
+        <Route path="/projects" element={<AllProjects isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}/>}></Route>
         <Route path="/" element={<LandingPage isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />}></Route>
       </Routes>
     </Router>

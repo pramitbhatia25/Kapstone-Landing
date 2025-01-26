@@ -1,12 +1,10 @@
 import { Divider } from "@nextui-org/react";
-import { Flame, Home, Layers, Projector, Settings, User } from "lucide-react";
-import { useLocation, useNavigate } from "react-router-dom";
+import {Home, Layers } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 function Sidebar({ isSidebarOpen }) {
     const location = useLocation();
-    const navigate = useNavigate();
 
-    // Helper function to determine if a route is active
     const isActive = (path) => location.pathname === path;
 
     return (
@@ -14,11 +12,7 @@ function Sidebar({ isSidebarOpen }) {
             <ul className="space-y-2">
                 <li>
                     <a
-                        href="#"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            navigate("/");
-                        }}
+                        href="/"
                         className={`flex items-center gap-4 rounded-lg transition-colors ${
                             isActive("/") ? "bg-white bg-opacity-10 text-white" : "bg-[#0f0f0f] hover:bg-white hover:bg-opacity-10"
                         } ${isSidebarOpen ? "flex flex-row justify-start p-1" : "flex flex-row justify-center py-1"}`}
@@ -29,11 +23,7 @@ function Sidebar({ isSidebarOpen }) {
                 </li>
                 <li>
                     <a
-                        href="#"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            navigate("/projects");
-                        }}
+                        href="/projects"
                         className={`flex items-center gap-4 rounded-lg transition-colors ${
                             isActive("/projects") ? "bg-white bg-opacity-10 text-white" : "bg-[#0f0f0f] hover:bg-white hover:bg-opacity-10"
                         } ${isSidebarOpen ? "flex flex-row justify-start p-1" : "flex flex-row justify-center py-1"}`}

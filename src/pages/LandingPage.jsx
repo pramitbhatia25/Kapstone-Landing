@@ -1,17 +1,16 @@
 import CustomNavbar from "../components/Navbar";
 import "./index.css";
-import { Button, Card, CardHeader, Spacer } from '@nextui-org/react';
-import { useNavigate } from 'react-router-dom';
+import { Button, Spacer } from '@nextui-org/react';
 import projects from "../data/projects";
-import features from "../data/features"
 import msfs from "../assets/msfspng.png"
 import sx from "../assets/sx.webp"
 import gt from "../assets/gt.png"
 import Sidebar from "../components/Sidebar";
+import { useNavigate } from "react-router-dom";
 
 function LandingPage({ isSidebarOpen, setIsSidebarOpen }) {
 
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     return (
 

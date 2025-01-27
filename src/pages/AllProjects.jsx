@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import CustomNavbar from "../components/Navbar";
-import { Avatar, Skeleton } from "@nextui-org/react";
 import Sidebar from "../components/Sidebar";
 import SkeletonProjects from "../components/SkeletonProjects";
 import Filters from "../components/Filters";
@@ -46,19 +45,17 @@ function AllProjects({ isSidebarOpen, setIsSidebarOpen }) {
     const [data, setData] = useState([])
 
     useEffect(() => {
-
         fetch('https://kapstone-landing-server.vercel.app/projects')
-          .then((response) => response.json())
-          .then((receivedData) => {
-            setData(receivedData)
-          })
-          .catch((error) => {
-            console.error('Error fetching projects:', error);
-          });
-
+            .then((response) => response.json())
+            .then((receivedData) => {
+                setData(receivedData)
+            })
+            .catch((error) => {
+                console.error('Error fetching projects:', error);
+            });
     }, [])
 
-    
+
     return <div className="allProjects bg-[#0f0f0f]">
         <div className="w-full top-0 z-[50]">
             <CustomNavbar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />

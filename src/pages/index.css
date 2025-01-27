@@ -5,6 +5,13 @@
     background-color: #0f0f0f;
 }
 
+.projectdetails {
+  width: 100dvw;
+  height: fit-content;
+  min-height: 100dvh;
+  background-color: #0f0f0f;
+}
+
 .landingpage2 {
     width: 100dvw;
     height: fit-content;

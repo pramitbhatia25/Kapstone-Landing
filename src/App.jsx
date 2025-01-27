@@ -12,7 +12,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/projects/:projectId" element={<ProjectDetails />} />
+        <Route path="/projects/:projectId" element={<ProjectDetails isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />} />
         <Route path="/projects" element={<AllProjects isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen}/>}></Route>
         <Route path="/" element={<LandingPage isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />}></Route>
         <Route path="*" element={<Error isSidebarOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />}></Route>

@@ -7,10 +7,16 @@ import sx from "../assets/sx.webp"
 import gt from "../assets/gt.png"
 import Sidebar from "../components/Sidebar";
 import { useNavigate } from "react-router-dom";
+import Footer from "../components/Footer";
 
 function LandingPage({ isSidebarOpen, setIsSidebarOpen }) {
 
     const navigate = useNavigate();
+    
+    const handleProjectClick = (projectId) => {
+        navigate(`/projects/${projectId}`);
+    };
+
 
     return (
 
@@ -74,7 +80,9 @@ function LandingPage({ isSidebarOpen, setIsSidebarOpen }) {
                                             <div
                                                 className={`h-[30dvh] max-h-[200px] flex flex-col items-center space-y-2 bg-[#0f0f0f] rounded-lg overflow-hidden`}
                                             >
-                                                <div className="h-full w-full hover:scale-[1.1] hover:cursor-pointer transition-transform duration-300 ease-in-out">
+                                                <div className="h-full w-full hover:scale-[1.1] hover:cursor-pointer transition-transform duration-300 ease-in-out"
+                                                onClick={() => {handleProjectClick(project.id)}}                                
+                                                >
                                                     <img
                                                         src={`https://kapstoneimages.blob.core.windows.net/images/${project.id}.jpg`}
                                                         alt={project.name}
@@ -107,8 +115,7 @@ function LandingPage({ isSidebarOpen, setIsSidebarOpen }) {
 
                         <Spacer y={8} />
 
-                        <div className="max-w-7xl mx-auto px-5 flex flex-row md:flex-row w-full animate-marquee"
-                            style={{ animation: "marquee 40s linear infinite" }}
+                        <div className="max-w-7xl mx-auto px-5 flex flex-col md:flex-row w-full"
                         >
                             <img
                                 src={sx}
@@ -116,117 +123,16 @@ function LandingPage({ isSidebarOpen, setIsSidebarOpen }) {
                             />
                             <img
                                 src={gt}
-                                className="h-10 md:h-20 mx-[50px] my-[20px]"
+                                className="h-15 md:h-20 mx-[50px] my-[20px]"
                             />
                             <img
                                 src={msfs}
-                                className="h-10 md:h-20 mx-[50px] my-[20px]"
-                            />
-                            <img
-                                src={sx}
-                                className="h-10 md:h-20 mx-[50px] my-[20px]"
-                            />
-                            <img
-                                src={gt}
-                                className="h-10 md:h-20 mx-[50px] my-[20px]"
-                            />
-                            <img
-                                src={msfs}
-                                className="h-10 md:h-20 mx-[50px] my-[20px]"
-                            />
-                            <img
-                                src={sx}
-                                className="h-10 md:h-20 mx-[50px] my-[20px]"
-                            />
-                            <img
-                                src={gt}
-                                className="h-10 md:h-20 mx-[50px] my-[20px]"
-                            />
-                            <img
-                                src={msfs}
-                                className="h-10 md:h-20 mx-[50px] my-[20px]"
-                            />
-                            <img
-                                src={sx}
-                                className="h-10 md:h-20 mx-[50px] my-[20px]"
-                            />
-                            <img
-                                src={gt}
-                                className="h-10 md:h-20 mx-[50px] my-[20px]"
-                            />
-                            <img
-                                src={msfs}
-                                className="h-10 md:h-20 mx-[50px] my-[20px]"
+                                className="h-15 md:h-20 mx-[50px] my-[20px]"
                             />
                         </div>
                     </div>
-
-
-                    <footer className="bg-[#0f0f0f] text-gray-300">
-                        <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
-                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                                {/* About Section */}
-                                <div>
-                                    <h2 className="text-lg font-semibold text-white">About Us</h2>
-                                    <p className="mt-2 text-sm">
-                                        Our mission is to empower students around the world to learn and grow through project-based programming, making hands-on learning accessible to everyone
-                                    </p>
-                                </div>
-
-                                {/* Links Section */}
-                                <div>
-                                    <h2 className="text-lg font-semibold text-white">Quick Links</h2>
-                                    <ul className="mt-2 space-y-2">
-                                        <li>
-                                            <a
-                                                href="#"
-                                                className="hover:underline hover:text-white transition"
-                                            >
-                                                Home
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="#"
-                                                className="hover:underline hover:text-white transition"
-                                            >
-                                                LinkedIn
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="#"
-                                                className="hover:underline hover:text-white transition"
-                                            >
-                                                Support Us
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a
-                                                href="#"
-                                                className="hover:underline hover:text-white transition"
-                                            >
-                                                Careers
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                {/* Contact Section */}
-                                <div>
-                                    <h2 className="text-lg font-semibold text-white">Contact Us</h2>
-                                    <p className="mt-2 text-sm">Email: pramitbhatia25@gmail.com</p>
-                                    <p className="text-sm">Phone: +1 470 430 3868</p>
-                                </div>
-                            </div>
-
-                            <div className="border-t border-gray-700 mt-8 pt-4 text-center">
-                                <p className="text-sm">
-                                    &copy; {new Date().getFullYear()} Kapstone. All rights reserved.
-                                </p>
-                            </div>
-                        </div>
-                    </footer>
+                    
+                    <Footer />
 
                 </div>
 
@@ -236,34 +142,3 @@ function LandingPage({ isSidebarOpen, setIsSidebarOpen }) {
 }
 
 export default LandingPage;
-
-
-
-// <div className="h-fit">
-
-// <div className="text-2xl md:text-2xl w-[100%] font-bold gap-[10px] text-center">
-//     Find project ideas, startup cofounders or teammates, all in one place 🔥
-// </div>
-
-// <Spacer y={8} />
-
-// <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10 px-4 mx-5">
-//     {features.map((feature, index) => (
-//         <Card key={index} className=" cursor-default h-[100px] hover:scale-[1.05] transition-transform duration-200 ease-in-out">
-//             <CardHeader className="flex gap-3 items-center h-full">
-//                 <div className="">
-//                     {feature.icon}
-//                 </div>
-//                 <div className="flex flex-col">
-//                     <p className="text-md font-semibold">{feature.title}</p>
-//                 </div>
-//             </CardHeader>
-//         </Card>
-//     ))}
-
-// </div>
-
-// </div>
-
-// <Spacer y={20} />
-

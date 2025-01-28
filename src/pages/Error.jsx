@@ -1,8 +1,5 @@
-import { useEffect, useState } from "react";
 import CustomNavbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
-import SkeletonProjects from "../components/SkeletonProjects";
-import Filters from "../components/Filters";
 
 function Error({ isSidebarOpen, setIsSidebarOpen }) {
 

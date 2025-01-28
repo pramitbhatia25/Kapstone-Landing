@@ -1,7 +1,7 @@
 import { Avatar, Skeleton } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
-function SkeletonProjects({ isSidebarOpen, data, selectedFilters }) {
+function SkeletonProjects({ isSidebarOpen, data }) {
 
     const navigate = useNavigate()
     
@@ -13,10 +13,6 @@ function SkeletonProjects({ isSidebarOpen, data, selectedFilters }) {
         {data.length != 0 ?
             <div className="h-full w-full flex flex-wrap gap-5 p-4">
                 {data
-                    .filter((project) =>
-                        selectedFilters.includes("All") ||
-                        project.category.some((cat) => selectedFilters.includes(cat))
-                    )
                     .map((project) => (
                         <div key={project.name} className={`w-[90dvw] ${isSidebarOpen ? "md:w-[25dvw]" : "md:w-[20dvw]"
                                     } md:max-w-[350px] md:min-w-[250px] `}>

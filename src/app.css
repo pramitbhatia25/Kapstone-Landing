@@ -31,13 +31,14 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: black; /* Color of the track */
+  background: black;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: lime;
+  border-radius: 20px;
+  background: darkgreen;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: lime;
 }

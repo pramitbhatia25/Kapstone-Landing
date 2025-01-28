@@ -2,14 +2,11 @@ import { useEffect, useState } from "react";
 import CustomNavbar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import SkeletonProjects from "../components/SkeletonProjects";
-import Filters from "../components/Filters";
 import { Input } from "@nextui-org/react";
-import Footer from "../components/Footer";
 
 function AllProjects({ isSidebarOpen, setIsSidebarOpen }) {
 
 
-    const [selectedFilters, setSelectedFilters] = useState("All");
     const allFilters = [
         "All",
         "Artificial Intelligence",
@@ -43,6 +40,7 @@ function AllProjects({ isSidebarOpen, setIsSidebarOpen }) {
         "Biometric Security Systems",
         "3D Printing",
     ]
+
     const SearchIcon = (props) => {
         return (
             <svg
@@ -103,10 +101,7 @@ function AllProjects({ isSidebarOpen, setIsSidebarOpen }) {
 
 
             <div className="main flex flex-col">
-                <div className={`hidden md:block h-[10dvh] w-[100dvw] ${isSidebarOpen ? "md:w-[85dvw]" : "md:w-[95dvw]"}`}>
-                    <Filters selectedFilters={selectedFilters} setSelectedFilters={setSelectedFilters} allFilters={allFilters} />
-                </div>
-                <div className={`block md:hidden h-[10dvh] w-[100dvw] ${isSidebarOpen ? "md:w-[85dvw]" : "md:w-[95dvw]"}`}>
+                <div className={`h-fit w-[100dvw] ${isSidebarOpen ? "md:w-[85dvw]" : "md:w-[95dvw]"}`}>
                     <div className="w-full p-4 h-full items-center max-h-[60px] overflow-hidden">
                         <Input
                             isClearable
@@ -141,7 +136,7 @@ function AllProjects({ isSidebarOpen, setIsSidebarOpen }) {
                     </div>
                 </div>
                 <div className={`h-[max(80dvh,calc(90dvh-60px))] overflow-auto flex flex-col w-[100dvw] ${isSidebarOpen ? "md:w-[85dvw]" : "md:w-[95dvw]"}`}>
-                    <SkeletonProjects isSidebarOpen={isSidebarOpen} data={data} selectedFilters={selectedFilters} />
+                    <SkeletonProjects isSidebarOpen={isSidebarOpen} data={data} />
                 </div>
             </div>
 
